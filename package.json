@@ -26,6 +26,7 @@
     "port": 8003
   },
   "scripts": {
+    "watch": "rc-tools run watch",
     "build": "rc-tools run build",
     "gh-pages": "rc-tools run gh-pages",
     "start": "rc-tools run server",

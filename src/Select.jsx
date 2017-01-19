@@ -162,19 +162,6 @@ const Select = React.createClass({
     this.adjustOpenState();
   },
 
-  componentDidUpdate() {
-    if (isMultipleOrTags(this.props)) {
-      const inputNode = this.getInputDOMNode();
-      const mirrorNode = this.getInputMirrorDOMNode();
-      if (inputNode.value) {
-        inputNode.style.width = '';
-        inputNode.style.width = `${mirrorNode.clientWidth}px`;
-      } else {
-        inputNode.style.width = '';
-      }
-    }
-  },
-
   componentWillUnmount() {
     this.clearBlurTime();
     this.clearAdjustTimer();
@@ -934,7 +921,7 @@ const Select = React.createClass({
           >
             {ctrlNode}
             {allowClear && !multiple ? clear : null}
-            {multiple || !props.showArrow ? null :
+            {props.showArrow &&
               (<span
                 key="arrow"
                 className={`${prefixCls}-arrow`}
