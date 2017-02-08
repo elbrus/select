@@ -31,7 +31,7 @@ let valueObjectShape;
 
 if (PropTypes) {
   valueObjectShape = PropTypes.oneOfType([
-    PropTypes.string,
+    PropTypes.node,
     PropTypes.shape({
       key: PropTypes.string,
       label: PropTypes.node,
