@@ -511,6 +511,8 @@ const Select = React.createClass({
     const inputCls = classnames(inputElement.props.className, {
       [`${props.prefixCls}-search__field`]: true,
     });
+    // https://github.com/ant-design/ant-design/issues/4992#issuecomment-281542159
+    // Add space to the end of the inputValue as the width measurement tolerance
     return (<div className={`${props.prefixCls}-search__field__wrap`}>
       {React.cloneElement(inputElement, {
         ref: this.saveInputRef,
@@ -524,11 +526,7 @@ const Select = React.createClass({
         ref={this.saveInputMirrorRef}
         className={`${props.prefixCls}-search__field__mirror`}
       >
-        {
-			// https://github.com/ant-design/ant-design/issues/4992#issuecomment-281542159
-			// Add space to the end of the value as the width measurement tolerance
-			`${this.state.inputValue} `
-		}
+        {this.state.inputValue}&nbsp;
       </span>
     </div>);
   },
