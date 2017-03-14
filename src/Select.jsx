@@ -20,7 +20,14 @@ function noop() {
 }
 
 function filterFn(input, child) {
-  return String(getPropValue(child, this.props.optionFilterProp)).indexOf(input) > -1;
+  const {filterCaseSensitive, optionFilterProp} = this.props;
+  const value = String(getPropValue(child, optionFilterProp));
+
+  if (filterCaseSensitive) {
+    return value.indexOf(input) > -1;
+  }
+
+  return value.toLowerCase().indexOf(input.toLowerCase()) > -1;
 }
 
 function saveRef(name, component) {
@@ -36,8 +43,8 @@ if (PropTypes) {
     PropTypes.object,
     PropTypes.shape({
       key: PropTypes.string,
-      label: PropTypes.node,
-    }),
+      label: PropTypes.node
+    })
   ]);
 }
 
@@ -46,6 +53,7 @@ const Select = React.createClass({
     defaultActiveFirstOption: PropTypes.bool,
     multiple: PropTypes.bool,
     filterOption: PropTypes.any,
+    filterCaseSensitive: PropTypes.bool,
     children: PropTypes.any,
     showSearch: PropTypes.bool,
     disabled: PropTypes.bool,
@@ -69,16 +77,16 @@ const Select = React.createClass({
     labelInValue: PropTypes.bool,
     value: PropTypes.oneOfType([
       valueObjectShape,
-      PropTypes.arrayOf(valueObjectShape),
+      PropTypes.arrayOf(valueObjectShape)
     ]),
     defaultValue: PropTypes.oneOfType([
       valueObjectShape,
-      PropTypes.arrayOf(valueObjectShape),
+      PropTypes.arrayOf(valueObjectShape)
     ]),
     dropdownStyle: PropTypes.object,
     maxTagTextLength: PropTypes.number,
     tokenSeparators: PropTypes.arrayOf(PropTypes.string),
-    getInputElement: PropTypes.func,
+    getInputElement: PropTypes.func
   },
 
   mixins: [FilterMixin],
@@ -87,6 +95,7 @@ const Select = React.createClass({
     return {
       prefixCls: 'rc-select',
       filterOption: filterFn,
+      filterCaseSensitive: true,
       defaultOpen: false,
       labelInValue: false,
       defaultActiveFirstOption: true,
@@ -106,7 +115,7 @@ const Select = React.createClass({
       dropdownMenuStyle: {},
       optionFilterProp: 'value',
       optionLabelProp: 'value',
-      notFoundContent: 'Not Found',
+      notFoundContent: 'Not Found'
     };
   },
 
@@ -133,7 +142,7 @@ const Select = React.createClass({
     return {
       value,
       inputValue,
-      open,
+      open
     };
   },
 
@@ -147,11 +156,11 @@ const Select = React.createClass({
       value = this.addLabelToValue(nextProps, value);
       value = this.addTitleToValue(nextProps, value);
       this.setState({
-        value,
+        value
       });
       if (nextProps.combobox) {
         this.setState({
-          inputValue: value.length ? this.getLabelFromProps(nextProps, value[0].key) : '',
+          inputValue: value.length ? this.getLabelFromProps(nextProps, value[0].key) : ''
         });
       }
     }
@@ -187,11 +196,11 @@ const Select = React.createClass({
     }
     this.setInputValue(val);
     this.setState({
-      open: true,
+      open: true
     });
     if (isCombobox(this.props)) {
       this.fireChange([{
-        key: val,
+        key: val
       }]);
     }
   },
