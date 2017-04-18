@@ -1,6 +1,6 @@
 {
   "name": "rc-select",
-  "version": "6.8.0",
+  "version": "8.8.0",
   "description": "React Select",
   "keywords": [
     "react",
@@ -70,7 +70,7 @@
     "dom-scroll-into-view": "1.x",
     "rc-animate": "2.x",
     "rc-menu": "5.x || 4.x",
-    "rc-trigger": "1.x",
+    "rc-trigger": "1.8.1",
     "rc-util": "4.x",
     "warning": "2.x"
   },
