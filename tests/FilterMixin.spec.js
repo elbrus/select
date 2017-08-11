@@ -1,5 +1,7 @@
 /* eslint-disable no-undef */
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
+import createClass from 'create-react-class';
 import FilterMixin from '../src/FilterMixin';
 import Menu from 'rc-menu';
 import OptGroup from '../src/OptGroup';
@@ -8,7 +10,7 @@ import { render, mount } from 'enzyme';
 import { renderToJson } from 'enzyme-to-json';
 
 describe('FilterMixin', () => {
-  const Select = React.createClass({
+  const Select = createClass({
     propTypes: {
       value: PropTypes.any,
       inputValue: PropTypes.string,
@@ -89,21 +91,6 @@ describe('FilterMixin', () => {
       );
 
       expect(renderToJson(wrapper)).toMatchSnapshot();
-    });
-
-    it('warns on invalid children', () => {
-      const Foo = () => <div>foo</div>;
-      spyOn(console, 'error');
-      mount(
-        <Select>
-          <Foo value="1" />
-        </Select>
-      );
-      expect(console.error.calls.count()).toBe(1);
-      expect(console.error.calls.argsFor(0)[0]).toContain(
-        'the children of `Select` should be `Select.Option` or `Select.OptGroup`, ' +
-          `instead of \`Foo\`.`
-      );
     });
 
     describe('tag mode', () => {
